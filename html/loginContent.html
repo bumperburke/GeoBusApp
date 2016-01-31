@@ -1,0 +1,23 @@
+<div class="content">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <h2 class="text-center"><strong>Login to GeoBus</strong></h2>
+        <div class="loginForm" ng-controller="loginCtrl">
+            <form>
+                <h4><strong>E-mail</strong></h4>
+                <input class="form-control" type="email" ng-model="email" placeholder="Please enter e-mail address...">
+                
+                <h4><strong>Password</strong></h4>
+                <input class="form-control" type="password" ng-model="password" placeholder="Please enter password...">
+                <br>
+
+                <button class="btn btn-primary btn-block" ladda="loggingIn" type="submit" ng-click="login()" data-style="expand-right">{{btnText}}</button>
+
+                <br><br><i><p class="text-center"><strong>Not Registered? Create an Account!</strong></p></i>
+
+                <button class="btn btn-primary btn-block" type="button" ng-click="getTest()">Create Account</button>
+                
+                <pre>{{ users }}</pre>
+            </form>
+        </div>
+    </div>
+</div>
