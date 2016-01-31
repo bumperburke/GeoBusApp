@@ -22,6 +22,11 @@ app.config(function ($routeProvider) {
         templateUrl: 'html/loginContent.html',
         controller: 'loginCtrl'
     })
+    
+    .when('/createAccount', {
+        templateUrl: 'html/newAccount.html',
+        controller: 'newAccountCtrl'
+    })
 
     .when('/home', {
         templateUrl: 'html/home.html',
@@ -30,9 +35,9 @@ app.config(function ($routeProvider) {
 
 });
 
-app.controller('loginCtrl', function ($scope, $http){
+app.controller('loginCtrl', function ($scope, $http, $location){
     $scope.btnText = "Login";
-    $scope.users = [];
+    /*$scope.users = [];*/
     
     $scope.login = function () {
         $scope.loggingIn = true;
@@ -40,16 +45,27 @@ app.controller('loginCtrl', function ($scope, $http){
         
     }
     
-    $scope.getTest = function() {
+    /*$scope.getTest = function() {
         $http.get("http://geobus.co.uk/api/getUsers.php")
         .then(function(response){
             $scope.users = response.data;
         }, function(response) {
             $scope.users = "ERROR";
         });
-    }
+    }*/
 });
 
 app.controller('homeCtrl', function ($scope) {
     $scope.message = 'Welcome!'
 });
+
+app.controller('newAccountCtrl', ['$scope', function ($scope) {
+    $scope.createBtn = "Create Account";
+    
+    $scope.register = function () {
+        $scope.registering = true;
+        $scope.createBtn = "Registering Details...";
+
+    }
+    
+}]);

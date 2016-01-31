@@ -17,13 +17,19 @@ body {
     height: 30px;
 }
 
-.navbar-brand {
+/*.navbar-brand {
     align-content: center;
     color: white;
 }
 
 #brand {
     color: white;
+}*/
+
+#logo {
+    margin-top: 5px;
+    height: 40px;
+    width: 100px;
 }
 
 .content {
@@ -48,6 +54,7 @@ body {
     background-color: forestgreen;
     margin-top: 10px;
     color: white;
+    border-color: black;
 }
 
 .footer {
@@ -65,4 +72,8 @@ body {
 #routeSelect {
     width: 100%;
     height: 40px;
+}
+
+#inputHeading {
+    text-align: left;
 }

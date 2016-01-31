@@ -1,0 +1,25 @@
+<div class="jumbotron text-center">
+    <div class="container">
+        <h2>Create New Account</h2>
+        <div class="registerForm" ng-controller="newAccountCtrl">
+            <form>
+                <h4 id="inputHeading"><strong>Name</strong></h4>
+                <input class="form-control" type="text" ng-model="name" placeholder="Full Name">
+
+                <h4 id="inputHeading"><strong>Date of Birth</strong></h4>
+                <input class="form-control" type="date" ng-model="dob">
+                
+                <h4 id="inputHeading"><strong>Email</strong></h4>
+                <input class="form-control" type="email" ng-model="emailNew" placeholder="user@user.com">
+                
+                <h4 id="inputHeading"><strong>Password</strong></h4>
+                <input class="form-control" type="password" ng-model="password" placeholder="Enter a Password">
+                
+                <h4 id="inputHeading"><strong>Confirm Password</strong></h4>
+                <input class="form-control" type="password" ng-model="passConfirm" placeholder="Re-type Password">
+                <br>
+
+                <button class="btn btn-primary btn-block" ladda="registering" type="submit" ng-click="register()" data-style="expand-right">{{ createBtn }}</button>
+            </form>
+    </div>
+</div>
