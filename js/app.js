@@ -2,7 +2,8 @@
 
 var app = angular.module('geobusapp', [
     'angular-ladda',
-    'ngRoute'
+    'ngRoute',
+    'jcs-autoValidate'
 ]);
 
 app.config(function ($routeProvider) {
@@ -12,7 +13,7 @@ app.config(function ($routeProvider) {
         templateUrl: 'html/greeting.html',
         controller: ''
     })
-    
+
     .when('/timetables', {
         templateUrl: 'html/timetables.html',
         controller: ''
@@ -22,7 +23,7 @@ app.config(function ($routeProvider) {
         templateUrl: 'html/loginContent.html',
         controller: 'loginCtrl'
     })
-    
+
     .when('/createAccount', {
         templateUrl: 'html/newAccount.html',
         controller: 'newAccountCtrl'
@@ -35,18 +36,25 @@ app.config(function ($routeProvider) {
 
 });
 
-app.controller('loginCtrl', function ($scope, $http, $location){
+app.run(function (defaultErrorMessageResolver) {
+    defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
+        errorMessages['passFail'] = 'Must contain upper and lower case letters and numbers';
+        errorMessages['mismatch'] = 'Passwords Do Not Match!';
+    })
+})
+
+app.controller('loginCtrl', function ($scope, $http, $location) {
     $scope.btnText = "Login";
     /*$scope.users = [];*/
-    
+
     $scope.login = function () {
         $scope.loggingIn = true;
         $scope.btnText = "Processing...";
-        
+
     }
-    
+
     /*$scope.getTest = function() {
-        $http.get("http://geobus.co.uk/api/getUsers.php")
+        $http.get("https://geobus.co.uk/api/getUsers.php")
         .then(function(response){
             $scope.users = response.data;
         }, function(response) {
@@ -59,13 +67,26 @@ app.controller('homeCtrl', function ($scope) {
     $scope.message = 'Welcome!'
 });
 
-app.controller('newAccountCtrl', ['$scope', function ($scope) {
+app.controller('newAccountCtrl', ['$scope', '$http', function ($scope, $http) {
+    $scope.formData = {};
     $scope.createBtn = "Create Account";
-    
-    $scope.register = function () {
+
+
+    $scope.formSubmit = function () {
         $scope.registering = true;
         $scope.createBtn = "Registering Details...";
 
+        var request = $http({
+                method: 'post',
+                url: 'https://geobus.co.uk/api/addUser/add.php',
+                data: $scope.formData,
+                headers: { 'Content-Type' : 'application/json' }
+            });
+        
+        request.success(function(data) {
+            $scope.registering = false;
+            $scope.createBtn = "Success!";
+            $scope.postResponse = data.reqSuccess;
+        });
     }
-    
 }]);

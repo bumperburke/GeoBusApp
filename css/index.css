@@ -4,7 +4,6 @@ html {
 }
 
 body {
-    /* Margin bottom by footer height */
     margin-bottom: 50px;
     background-color: lightgray;
 }
@@ -13,18 +12,9 @@ body {
     background-color: forestgreen;
     color: white;
     box-shadow: 5px 5px 10px #888888;
-    border-bottom-color: #888888;
+    border-color: forestgreen;
     height: 30px;
 }
-
-/*.navbar-brand {
-    align-content: center;
-    color: white;
-}
-
-#brand {
-    color: white;
-}*/
 
 #logo {
     margin-top: 5px;
@@ -35,9 +25,6 @@ body {
 .content {
     height: 390px;
     margin-top: -10px;
-    /*background-image: url('../images/loginBackground.PNG');
-    background-size: 400px 400px;
-    background-repeat: no-repeat;*/
 }
 
 .loginForm {
@@ -54,7 +41,11 @@ body {
     background-color: forestgreen;
     margin-top: 10px;
     color: white;
-    border-color: black;
+    border-color: forestgreen;
+}
+
+.btn:hover {
+    background-color: #4ea24e;
 }
 
 .footer {
@@ -74,6 +65,8 @@ body {
     height: 40px;
 }
 
-#inputHeading {
+.control-label {
+    width: 100%;
     text-align: left;
+    font-size: 15px;
 }

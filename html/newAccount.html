@@ -2,24 +2,54 @@
     <div class="container">
         <h2>Create New Account</h2>
         <div class="registerForm" ng-controller="newAccountCtrl">
-            <form>
-                <h4 id="inputHeading"><strong>Name</strong></h4>
-                <input class="form-control" type="text" ng-model="name" placeholder="Full Name">
+            <form ng-submit="formSubmit()">
+                <div class="form-group">
+                    <label for="name" class="control-label">Name</label>
+                    <input class="form-control" type="text" ng-model="formData.name" placeholder="First Last" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dateOfBirth" class="control-label">Date of Birth</label>
+                    <input class="form-control" type="date" ng-model="formData.dob" required="required">
+                </div>
 
-                <h4 id="inputHeading"><strong>Date of Birth</strong></h4>
-                <input class="form-control" type="date" ng-model="dob">
-                
-                <h4 id="inputHeading"><strong>Email</strong></h4>
-                <input class="form-control" type="email" ng-model="emailNew" placeholder="user@user.com">
-                
-                <h4 id="inputHeading"><strong>Password</strong></h4>
-                <input class="form-control" type="password" ng-model="password" placeholder="Enter a Password">
-                
-                <h4 id="inputHeading"><strong>Confirm Password</strong></h4>
-                <input class="form-control" type="password" ng-model="passConfirm" placeholder="Re-type Password">
-                <br>
+                <div class="form-group">
+                    <label for="sex" class="control-label">Sex</label>
+                    <select class="form-control" ng-model="formData.sex" id="sexSelect">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
 
-                <button class="btn btn-primary btn-block" ladda="registering" type="submit" ng-click="register()" data-style="expand-right">{{ createBtn }}</button>
+                <div class="form-group">
+                    <label for="email" class="control-label">Email</label>
+                    <input class="form-control" type="email" ng-model="formData.emailNew"
+                           placeholder="user@user.com" required="required">
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="control-label">Password</label>
+                    <input class="form-control" type="password" ng-model="formData.password"
+                           placeholder="Enter a Password" required="required"
+                           ng-minlength="6"
+                           ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/"
+                           ng-pattern-err-type="passFail">
+                </div>
+                
+                <div class="form-group">
+                    <label for="passConf" class="control-label">Confirm Password</label>
+                    <input class="form-control" type="password"
+                           placeholder="Re-type Password" required="required"
+                           ><!--ng-pattern="\b{{formData.password}}\b"
+                           ng-pattern-err-type="mismatch">-->
+                </div><br>
+
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" ladda="registering" type="submit"
+                            data-style="expand-right">{{ createBtn }}</button>
+                </div>
             </form>
+            <span ng-show="postResponse">{{ postResponse }}</span>
+        </div>
     </div>
-</div>
