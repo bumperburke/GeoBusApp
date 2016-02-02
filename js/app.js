@@ -2,11 +2,46 @@
 
 var app = angular.module('geobusapp', [
     'angular-ladda',
-    'ngRoute',
+    'ui.router',
     'jcs-autoValidate'
 ]);
 
-app.config(function ($routeProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
+    
+    $urlRouterProvider.otherwise("/welcome");
+    
+    $stateProvider
+    .state('welcome', {
+        url: "/welcome",
+        templateUrl: "html/greeting.html",
+        controller: ''
+    })
+    
+    .state('timetables', {
+        url: "/timetables",
+        templateUrl: "html/timetables.html",
+        controller: ''
+    })
+    
+    .state('login', {
+        url: "/login",
+        templateUrl: "html/loginContent.html",
+        controller: 'loginCtrl'
+    })
+    
+    .state('register', {
+        url: "/register",
+        templateUrl: "html/newAccount.html",
+        controller: 'newAccountCtrl'
+    })
+    
+    .state('home', {
+        url: "/home",
+        templateUrl: "html/home.html",
+        controller: ''
+    });
+});
+/*app.config(function ($routeProvider) {
     $routeProvider
 
         .when('/', {
@@ -34,7 +69,7 @@ app.config(function ($routeProvider) {
         controller: 'homeCtrl'
     });
 
-});
+});*/
 
 app.run(function (defaultErrorMessageResolver) {
     defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
