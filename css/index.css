@@ -33,6 +33,10 @@ body {
     margin-top: 10px;
 }
 
+.registerSection {
+    padding-top: 40px;
+}
+
 .form-control {
     box-shadow: 5px 5px 10px #888888;
 }
@@ -45,6 +49,10 @@ body {
 }
 
 .btn:hover {
+    background-color: #4ea24e;
+}
+
+.btn:active {
     background-color: #4ea24e;
 }
 

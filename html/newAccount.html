@@ -2,10 +2,12 @@
     <div class="container">
         <h2>Create New Account</h2>
         <div class="registerForm" ng-controller="newAccountCtrl">
-            <form ng-submit="formSubmit()">
+            <form ng-submit="formSubmit()" ng-show="showForm">
                 <div class="form-group">
                     <label for="name" class="control-label">Name</label>
-                    <input class="form-control" type="text" ng-model="formData.name" placeholder="First Last" required="required">
+                    <input class="form-control" type="text" ng-model="formData.name"
+                           placeholder="First Last" required="required"
+                           ng-pattern="/[a-zA-Z]+/" ng-pattern-err-type="nameError">
                 </div>
                 
                 <div class="form-group">
@@ -34,22 +36,25 @@
                            placeholder="Enter a Password" required="required"
                            ng-minlength="6"
                            ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/"
-                           ng-pattern-err-type="passFail">
+                           ng-pattern-err-type="passError">
                 </div>
                 
                 <div class="form-group">
                     <label for="passConf" class="control-label">Confirm Password</label>
                     <input class="form-control" type="password"
-                           placeholder="Re-type Password" required="required"
-                           ><!--ng-pattern="\b{{formData.password}}\b"
-                           ng-pattern-err-type="mismatch">-->
+                           placeholder="Re-type Password" required="required" ng-model="passConfirm"
+                           ng-pattern="formData.password"
+                           ng-pattern-err-type="mismatchPassError">
                 </div><br>
-
+                
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" ladda="registering" type="submit"
+                    <button class="btn btn-primary btn-block" ng-disabled="disableButton" ladda="registering" type="submit"
                             data-style="expand-right">{{ createBtn }}</button>
                 </div>
             </form>
-            <span ng-show="postResponse">{{ postResponse }}</span>
+            <span ng-show="showResponse" ng-style="responseMsgColor">{{ postResponse }}</span>
+            <span ng-show="showResponse">
+                <a type="button" ui-sref="login" class="btn btn-primary btn-block">Login</a>
+            </span>
         </div>
     </div>
