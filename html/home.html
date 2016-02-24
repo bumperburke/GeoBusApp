@@ -4,11 +4,14 @@
 <head>
     <title>GeoBus</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1">
+
     <!-- JQuery and JQuery mobile -->
+    <!-- Include jQuery Mobile stylesheets -->
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <!-- Include the jQuery library -->
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Include the jQuery Mobile library -->
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <!--<link rel="stylesheet" href="../resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
     <script src="../resources/jquery/dist/jquery.min.js"></script>
@@ -19,52 +22,64 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- LeafletJS -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <!--<link rel="stylesheet" href="../resources/leaflet/dist/leaflet.css" />
     <script src="../resources/leaflet/dist/leaflet.js"></script>-->
     <!-- CSS & Scripts -->
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/home.css">
 </head>
 
-<body>
-    <!-- Index Page Begin -->
-    <div data-role="page" id="welcomePage">
+<body onload="getLocations()">
+    <div data-role="page" id="home">
+        <div data-role="panel" id="menu" data-swipe-close="true" data-display="overlay">
+            <ul class="nav navbar-nav" id="slideMenu">
+                <center>
+                <label class="menuLabel">Swipe to Close</label><span id="slideGlyph" class="glyphicon glyphicon-chevron-left"></span></center>
+                <li><a href="#home" class="menuOption">Home</a></li>
+                <li><a href="#" class="menuOption">Track</a></li>
+                <li><a href="#" class="menuOption">Timetables</a></li>
+                <li><a href="#" class="menuOption">Routes</a></li>
+                <li><a href="#" class="menuOption">Log Out</a></li>
+            </ul>
+        </div>
+
         <div data-role="header" class="ui-header">
             <div class="container-fluid" id="header">
-                <a href="#welcomePage" id="logoLink">
-                    <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
+                <a href="#menu" class="navbar-toggle" role="button">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a href="#home" id="logoLink">
+                    <img src="../images/logo.png" id="logo" alt="GeoBus Logo">
                 </a>
             </div>
         </div>
-        
+
         <div data-role="main" class="ui-content">
-            <div class="jumbotron text-center">
-                <h1>Welcome to GeoBus</h1>
-
-                <p>Please choose an option:</p>
-
-                <p>View Timetables<br>
-                    <a href="#"><span class="glyphicon glyphicon-list"></span></a></p>
-
-                <p>Login or Create Account<br>
-                    <a href="#loginPage"><span class="glyphicon glyphicon-user"></span></a></p>
-
+            <div class="alert alert-success" id="successAlert">
+                Successfull Login!
+            </div>
+            <div id="mapWrapper">
+                <div id="map">
+                    <div id="leaflet-bottom leaflet-right">
+                        <div id="legend">
+                            <input type="image" src="../images/locateUser.png" alt="locateUser">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-            
-        <!--<div data-role="footer" class="ui-footer" data-position="fixed">
-            <center><p><i>Developed by Stefan Burke<br>
-                <a href="http://www.dit.ie/">Dublin Institute of Technology</a></i></p></center>
-        </div>-->
     </div>
-    
-    <!-- Login Page Begin -->
-    <div data-role="page" id="loginPage">
+
+    <!-- <div data-role="page" id="loginPage">
         <div data-role="header" class="ui-header">
             <div class="container-fluid" id="header">
                 <div class="navbar-header">
                     <a href="#welcomePage" id="logoLink">
-                        <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
+                        <img src="../images/logo.png" id="logo" alt="GeoBus Logo">
                     </a>
                 </div>
             </div>
@@ -75,18 +90,17 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <h2 class="text-center"><strong>Login to GeoBus</strong></h2>
                     <div class="loginForm">
-                        <form method="post"><!--name="logonForm" id="logonForm">-->
-                            <fieldset data-role="controlgroup">
+                        <form name="logonForm" id="logonForm" data-ajax="false">
+                            <fieldset>
                                 <div class="form-group">
                                     <label for="email" class="control-label">Email</label>
-                                    <input class="form-control" type="email" id="email"
-                                           placeholder="user@user.com" required="required">
+                                    <input class="form-control" type="email" id="email" placeholder="user@user.com" required="required">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password" class="control-label">Password</label>
-                                    <input class="form-control" type="password" id="password"
-                                           placeholder="Enter a Password" required="required"><br>
+                                    <input class="form-control" type="password" id="password" placeholder="Enter a Password" required="required">
+                                    <br>
                                 </div>
 
                                 <div class="form-group">
@@ -94,12 +108,6 @@
                                 </div>
                             </fieldset>
                         </form>
-                        <div class="alert alert-danger" id="failAlert">
-                            
-                        </div>
-                        <div class="alert alert-success" id="registerSuccessAlert">
-
-                        </div>
 
                         <div class="registerSection">
                             <a href="#registerPage"><i><p class="text-center"><strong>Not Registered? Create an Account!</strong></p></i></a>
@@ -109,14 +117,13 @@
             </div>
         </div>
     </div>
-    
-    <!-- Register Page Begin -->
+
     <div data-role="page" id="registerPage">
         <div data-role="header" class="ui-header">
             <div class="container-fluid" id="header">
                 <div class="navbar-header">
                     <a href="#welcomePage" id="logoLink">
-                        <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
+                        <img src="../images/logo.png" id="logo" alt="GeoBus Logo">
                     </a>
                 </div>
             </div>
@@ -130,19 +137,17 @@
                         <form ng-submit="formSubmit()">
                             <div class="form-group">
                                 <label for="name" class="control-label">Name</label>
-                                <input class="form-control" type="text"
-                                       placeholder="First Last" required="required" id="name">
+                                <input class="form-control" type="text" placeholder="First Last" required="required">
                             </div>
 
                             <div class="form-group">
                                 <label for="dateOfBirth" class="control-label">Date of Birth</label>
-                                <input class="form-control" data-role="date"
-                                       type="text" required="required" id="dob" placeholder="dd/mm/yyyy">
+                                <input class="form-control" type="date" required="required">
                             </div>
 
                             <div class="form-group">
                                 <label for="sex" class="control-label">Sex</label>
-                                <select class="form-control" id="sex">
+                                <select class="form-control" id="sexSelect">
                                     <option>Male</option>
                                     <option>Female</option>
                                     <option>Other</option>
@@ -151,34 +156,30 @@
 
                             <div class="form-group">
                                 <label for="email" class="control-label">Email</label>
-                                <input class="form-control" type="email" id="email"
-                                       placeholder="user@user.com" required="required">
+                                <input class="form-control" type="email" placeholder="user@user.com" required="required">
                             </div>
 
                             <div class="form-group">
                                 <label for="password" class="control-label">Password</label>
-                                <input class="form-control" type="password" id="password"
-                                       placeholder="Enter a Password" required="required">
+                                <input class="form-control" type="password" placeholder="Enter a Password" required="required">
                             </div>
 
                             <div class="form-group">
                                 <label for="passConf" class="control-label">Confirm Password</label>
-                                <input class="form-control" type="password"
-                                       placeholder="Re-type Password" required="required">
-                            </div><br>
+                                <input class="form-control" type="password" placeholder="Re-type Password" required="required">
+                            </div>
+                            <br>
 
                             <div class="form-group">
-                                <button class="btn btn-primary btn-block" type="submit" id="registerButton"
-                                        data-style="expand-right">Register</button>
+                                <button class="btn btn-primary btn-block" type="submit" data-style="expand-right">Register</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <script src="js/index.js"></script>
+        </div>-->
+    <script src="../js/home.js"></script>
+    <script src="../js/map.js"></script>
 </body>
 
 </html>

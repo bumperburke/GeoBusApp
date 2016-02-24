@@ -1,0 +1,57 @@
+.ui-header {
+    box-shadow: 5px 5px 10px #888888;
+    border-color: forestgreen;
+}
+
+#header{
+    background-color: forestgreen;
+    border-color: forestgreen;
+}
+
+.icon-bar{
+    background-color: white;
+}
+
+.navbar-toggle {
+    float: left;
+    background-color: forestgreen;
+    border-color: white;
+}
+
+#logoLink {
+    float: right;
+    margin-top: 5px;
+}
+
+#logo {
+    height: 40px;
+    width: 100px;
+    float: right;
+}
+
+#menu {
+    background-color: forestgreen;
+}
+
+.menuOption:link {
+    font-family: serif;
+    font-size: 20px;
+    color: white;
+}
+
+/*.menuOption:visited {
+    font-family: serif;
+    font-size: 20px;
+    color: white;
+    text-emphasis-color: black;
+}
+
+.menuOption:hover {
+    color: black;
+    background-color: blue;
+}
+
+.menuOption:active {
+    color: black;
+    background-color: blue;
+}*/
