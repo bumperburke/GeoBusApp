@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>GeoBus</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1">
+
+    <!-- JQuery and JQuery mobile -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <!-- Include the jQuery library -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Include the jQuery Mobile library -->
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <!--Bootstrap library-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- LeafletJS -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <!-- CSS & Scripts -->
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <script src="./js/index.js"></script>
+</head>
+
+    <body>
+    <div data-role="page" id="home">
+        
+        <div data-role="panel" id="menu" data-swipe-close="true" data-display="overlay">
+            <ul class="nav navbar-nav" id="slideMenu">
+                <center>
+                <label class="menuLabel">Swipe to Close</label><span id="slideGlyph" class="glyphicon glyphicon-chevron-left"></span></center>
+                <li><a href="#home" class="menuOption">Home</a></li>
+                <li><a href="#" class="menuOption">Track</a></li>
+                <li><a href="#" class="menuOption">Timetables</a></li>
+                <li><a href="#routes" class="menuOption">Routes</a></li>
+                <li><a href="index.html" class="menuOption">Log Out</a></li>
+            </ul>
+        </div>
+
+        <div data-role="header" class="ui-header">
+            <a href="#menu" class="navbar-toggle" role="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <img src="../images/logo.png" id="logo" alt="GeoBus Logo">
+        </div>
+
+        <div id="map" data-role="main" class="ui-content">
+            <script src="./js/map.js"></script>
+        </div>
+    </div>
+
+    <div data-role="page" id="routes">
+        <script>$("map").remove();</script>
+        <div data-role="panel" id="menu" data-swipe-close="true" data-display="overlay">
+            <ul class="nav navbar-nav" id="slideMenu">
+                <center>
+                    <label class="menuLabel">Swipe to Close</label><span id="slideGlyph" class="glyphicon glyphicon-chevron-left"></span></center>
+                <li><a href="#home" class="menuOption">Home</a></li>
+                <li><a href="#" class="menuOption">Track</a></li>
+                <li><a href="#" class="menuOption">Timetables</a></li>
+                <li><a href="#routes" class="menuOption">Routes</a></li>
+                <li><a href="index.html" class="menuOption">Log Out</a></li>
+            </ul>
+        </div>
+
+        <div data-role="header" class="ui-header">
+            <a href="#menu" class="navbar-toggle" role="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <img src="../images/logo.png" id="logo" alt="GeoBus Logo">
+        </div>
+
+        <div data-role="main" class="ui-content">
+            <div class="jumbotron text-center">
+                <div class="container">
+                    <h2>Select A Route To View On Map</h2>
+                    <form role="form">
+                        <label for="selectOptions">Available Routes:</label>
+                        <select class="form-control" id="routeSelect">
+                            <option>Choose a Route</option>
+                            <option>Dundalk - Drogheda - Dublin</option>
+                            <option>Bettystown - Laytown - Dublin</option>
+                        </select>
+                        <br>
+                        <button type="submit" id="submitRoute">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/home.js"></script>
+    <script src="./resources/Leaflet.EasyButton/src/easy-button.js"></script>
+</body>
+
+</html>

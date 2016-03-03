@@ -1,9 +1,29 @@
-#map{
-    margin-top: 5px;
-    height: 550px;
-    /*width: 200px;*/
+#map {
+    height: 500px;
 }
 
+.ui-content {
+    padding: 0;
+    padding-top: 10px;
+}
+
+.menuLabel {
+    color: white;
+}
+
+#slideGlyph {
+    font-size: 25px;
+    color: white;
+    border-color: black;
+}
+
+.menuOption:visited {
+    color: white;
+}
+
+.menuOption:active {
+    background: #eeeeee;
+}
 /*#mapWrapper {
     width: 100%;
     height: 555px;

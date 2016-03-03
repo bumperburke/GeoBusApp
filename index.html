@@ -10,31 +10,23 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <!--<link rel="stylesheet" href="../resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
-    <script src="../resources/jquery/dist/jquery.min.js"></script>
-    <script src="../resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
     <!-- Bootstrap -->
-    <!--<link rel="stylesheet" href="../resources/bootstrap/dist/css/bootstrap.min.css">
-    <script src="../resources/bootstrap/dist/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- LeafletJS -->
-    <!--<link rel="stylesheet" href="../resources/leaflet/dist/leaflet.css" />
-    <script src="../resources/leaflet/dist/leaflet.js"></script>-->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <!-- CSS & Scripts -->
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/home.css">
 </head>
 
 <body>
     <!-- Index Page Begin -->
     <div data-role="page" id="welcomePage">
         <div data-role="header" class="ui-header">
-            <div class="container-fluid" id="header">
-                <a href="#welcomePage" id="logoLink">
-                    <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
-                </a>
-            </div>
+            <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
         
         <div data-role="main" class="ui-content">
@@ -44,67 +36,79 @@
                 <p>Please choose an option:</p>
 
                 <p>View Timetables<br>
-                    <a href="#"><span class="glyphicon glyphicon-list"></span></a></p>
+                    <a href="#timetablesPage"><span class="glyphicon glyphicon-list"></span></a></p>
 
                 <p>Login or Create Account<br>
                     <a href="#loginPage"><span class="glyphicon glyphicon-user"></span></a></p>
 
             </div>
         </div>
-            
-        <!--<div data-role="footer" class="ui-footer" data-position="fixed">
-            <center><p><i>Developed by Stefan Burke<br>
-                <a href="http://www.dit.ie/">Dublin Institute of Technology</a></i></p></center>
-        </div>-->
+    </div>
+    
+    <!-- Timetables Page -->
+    <div data-role="page" id="timetablesPage">
+        <div data-role="header" class="ui-header">
+            <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
+        </div>
+
+        <div data-role="main" class="ui-content">
+            <div class="jumbotron text-center">
+                <div class="container">
+                    <h2>Please Select A Route</h2>
+                    <form role="form">
+                        <label for="selectOptions">Available Routes:</label>
+                        <select class="form-control" id="routeSelect">
+                            <option>Choose a Route</option>
+                            <option>Dundalk - Drogheda - Dublin</option>
+                            <option>Bettystown - Laytown - Dublin</option>
+                            <option>IFSC</option>
+                            <option>UCD College</option>
+                            <option>Christmas Service</option>
+                            <option>City North</option>
+                        </select>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Login Page Begin -->
     <div data-role="page" id="loginPage">
         <div data-role="header" class="ui-header">
-            <div class="container-fluid" id="header">
-                <div class="navbar-header">
-                    <a href="#welcomePage" id="logoLink">
-                        <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
-                    </a>
-                </div>
-            </div>
+            <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
-
+        
         <div data-role="main" class="ui-content">
-            <div class="content">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <h2 class="text-center"><strong>Login to GeoBus</strong></h2>
-                    <div class="loginForm">
-                        <form method="post"><!--name="logonForm" id="logonForm">-->
-                            <fieldset data-role="controlgroup">
-                                <div class="form-group">
-                                    <label for="email" class="control-label">Email</label>
-                                    <input class="form-control" type="email" id="email"
-                                           placeholder="user@user.com" required="required">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="password" class="control-label">Password</label>
-                                    <input class="form-control" type="password" id="password"
-                                           placeholder="Enter a Password" required="required"><br>
-                                </div>
-
-                                <div class="form-group">
-                                    <button type="submit" id="loginButton" value="Login">Login</button>
-                                </div>
-                            </fieldset>
-                        </form>
-                        <div class="alert alert-danger" id="failAlert">
-                            
-                        </div>
-                        <div class="alert alert-success" id="registerSuccessAlert">
-
+            <h2 class="text-center"><strong>Login to GeoBus</strong></h2>
+            <div class="loginForm">
+                <form method="post">
+                    <fieldset data-role="controlgroup">
+                        <div class="form-group">
+                            <label for="email" class="control-label">Email</label>
+                            <input class="form-control" type="email" id="email" placeholder="user@user.com" required="required">
                         </div>
 
-                        <div class="registerSection">
-                            <a href="#registerPage"><i><p class="text-center"><strong>Not Registered? Create an Account!</strong></p></i></a>
+                        <div class="form-group">
+                            <label for="password" class="control-label">Password</label>
+                            <input class="form-control" type="password" id="password" placeholder="Enter a Password" required="required">
+                            <br>
                         </div>
-                    </div>
+
+                        <div class="form-group">
+                            <button type="submit" id="loginButton" value="Login">Login</button>
+                        </div>
+                    </fieldset>
+                </form>
+                <div class="alert alert-danger" id="failAlert">
+
+                </div>
+                <div class="alert alert-success" id="registerSuccessAlert">
+
+                </div>
+
+                <div class="registerSection">
+                    <a href="#registerPage"><i><p class="text-center"><strong>Not Registered? Create an Account!</strong></p></i></a>
                 </div>
             </div>
         </div>
@@ -113,72 +117,60 @@
     <!-- Register Page Begin -->
     <div data-role="page" id="registerPage">
         <div data-role="header" class="ui-header">
-            <div class="container-fluid" id="header">
-                <div class="navbar-header">
-                    <a href="#welcomePage" id="logoLink">
-                        <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
-                    </a>
-                </div>
-            </div>
+            <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
 
-        <div data-role="main" class="ui-content">
-            <div class="jumbotron text-center">
-                <div class="container">
-                    <h2>Create New Account</h2>
-                    <div class="registerForm">
-                        <form ng-submit="formSubmit()">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Name</label>
-                                <input class="form-control" type="text"
-                                       placeholder="First Last" required="required" id="name">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="dateOfBirth" class="control-label">Date of Birth</label>
-                                <input class="form-control" data-role="date"
-                                       type="text" required="required" id="dob" placeholder="dd/mm/yyyy">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="sex" class="control-label">Sex</label>
-                                <select class="form-control" id="sex">
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email" class="control-label">Email</label>
-                                <input class="form-control" type="email" id="email"
-                                       placeholder="user@user.com" required="required">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password" class="control-label">Password</label>
-                                <input class="form-control" type="password" id="password"
-                                       placeholder="Enter a Password" required="required">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="passConf" class="control-label">Confirm Password</label>
-                                <input class="form-control" type="password"
-                                       placeholder="Re-type Password" required="required">
-                            </div><br>
-
-                            <div class="form-group">
-                                <button class="btn btn-primary btn-block" type="submit" id="registerButton"
-                                        data-style="expand-right">Register</button>
-                            </div>
-                        </form>
+    <div data-role="main" class="ui-content">
+        <div class="jumbotron text-center">
+            <h2>Create New Account</h2>
+                <form ng-submit="formSubmit()">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Name</label>
+                        <input class="form-control" type="text" placeholder="First Last" required="required" id="name">
                     </div>
+                    <div class="form-group">
+                        <label for="dateOfBirth" class="control-label">Date of Birth</label>
+                        <input class="form-control" data-role="date" type="text" required="required" id="dob" placeholder="dd/mm/yyyy">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sex" class="control-label">Sex</label>
+                        <select class="form-control" id="sex">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email</label>
+                        <input class="form-control" type="email" id="emailNew" placeholder="user@user.com" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <input class="form-control" type="password" id="passwordNew" placeholder="Enter a Password" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passConf" class="control-label">Confirm Password</label>
+                        <input class="form-control" type="password" id="passMatch" placeholder="Re-type Password" required="required">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" id="registerButton" data-style="expand-right">Register</button>
+                    </div>
+                </form>
+            
+                <div class="alert alert-danger" id="registerFailAlert">
+
                 </div>
             </div>
         </div>
     </div>
     
-    <script src="js/index.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
