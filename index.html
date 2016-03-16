@@ -59,18 +59,41 @@
                         <label for="selectOptions">Available Routes:</label>
                         <select class="form-control" id="routeSelect">
                             <option>Choose a Route</option>
-                            <option>Dundalk - Drogheda - Dublin</option>
-                            <option>Bettystown - Laytown - Dublin</option>
+                            <option>Dundalk-Drogheda-Dublin</option>
+                            <option>Bettystown-Laytown-Dublin</option>
                             <option>IFSC</option>
                             <option>UCD College</option>
                             <option>Christmas Service</option>
                             <option>City North</option>
                         </select>
                         <br>
+                        <button id="selectTimetable">Select</button>
                     </form>
+                    <div class="alert alert-danger" id="tableSelectError">
+
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <!-- Display Timetable -->
+    <div data-role="page" id="displayTimetable">
+        <div data-role="header" class="ui-header">
+            <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
+        </div>
+
+        <div data-role="main" class="ui-content">
+            <div class="jumbotron text-center">
+                <h2 id="header1"></h2>
+                <div id="inbound">
+                </div>
+                <h2 id="header2"></h2>
+                <div id="outbound">
+                </div>
+            </div>
+        </div>
+
     </div>
     
     <!-- Login Page Begin -->
@@ -83,6 +106,7 @@
             <h2 class="text-center"><strong>Login to GeoBus</strong></h2>
             <div class="loginForm">
                 <form method="post">
+                    <center>
                     <fieldset data-role="controlgroup">
                         <div class="form-group">
                             <label for="email" class="control-label">Email</label>
@@ -99,6 +123,7 @@
                             <button type="submit" id="loginButton" value="Login">Login</button>
                         </div>
                     </fieldset>
+                    </center>
                 </form>
                 <div class="alert alert-danger" id="failAlert">
 
@@ -123,16 +148,18 @@
     <div data-role="main" class="ui-content">
         <div class="jumbotron text-center">
             <h2>Create New Account</h2>
-                <form ng-submit="formSubmit()">
+                <form>
+                    <center>
                     <div class="form-group">
                         <label for="name" class="control-label">Name</label>
                         <input class="form-control" type="text" placeholder="First Last" required="required" id="name">
                     </div>
+                    
                     <div class="form-group">
-                        <label for="dateOfBirth" class="control-label">Date of Birth</label>
-                        <input class="form-control" data-role="date" type="text" required="required" id="dob" placeholder="dd/mm/yyyy">
+                        <label for="age" class="control-label">Age</label>
+                        <input class="form-control" type="number" placeholder="Enter Your Age" id="age">
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="sex" class="control-label">Sex</label>
                         <select class="form-control" id="sex">
@@ -161,6 +188,7 @@
                     <div class="form-group">
                         <button class="btn btn-primary btn-block" type="submit" id="registerButton" data-style="expand-right">Register</button>
                     </div>
+                    </center>
                 </form>
             
                 <div class="alert alert-danger" id="registerFailAlert">
@@ -171,6 +199,7 @@
     </div>
     
     <script src="./js/index.js"></script>
+    <script src="../js/getTimetable.js"></script>
 </body>
 
 </html>

@@ -58,6 +58,7 @@ $.ajax({
     }
 });
 
+/*
 $.ajax({
     type: "GET",
     url: "https://www.geobus.co.uk/api/v1/getStops",
@@ -67,11 +68,7 @@ $.ajax({
             var markerList = [];
             for (i = 0; i < stops.length; i++) {
                 marker = new L.marker([stops[i].Xpos, stops[i].Ypos]).bindPopup(stops[i].name).addTo(map); //.bindPopup(stops.name[i]);
-
-                //markerList.push(marker);
             }
-
-            //map.addLayer(markerList);
 
         } else if (data.error == true) {
             //hideShowAlert($('#failAlert'));
@@ -82,16 +79,16 @@ $.ajax({
         //console.log(result.error+"\n"+result.user+"\n"+result.token+"\n"+result.message);
     }
 });
+*/
 
 
-    /*$('#submitRoute').click(function(){
+    $('#submitRoute').click(function(){
         var route = $('#submitRoute').val();
-        console.log(route);*/
-    /**/
+        console.log(route);
+    
 
-    /*    return false;
+        return false;
     });
-    */
     /*L.easyButton('<img src="../images/locateUser.png">', function(btn, map){
 
     }).addTo(map);*/

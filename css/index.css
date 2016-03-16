@@ -42,3 +42,31 @@ html, body {
     text-align: left;
     font-size: 15px;
 }
+
+.form-group {
+    width: 80%;
+}
+
+#midweek {
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#stops {
+    background-color: forestgreen;
+    color: white;
+}
+
+#times {
+    background-color: lightgray;
+    color: black;
+}
