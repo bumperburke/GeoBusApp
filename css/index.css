@@ -47,9 +47,22 @@ html, body {
     width: 80%;
 }
 
-#midweek {
-    overflow: hidden;
+#tableContainer{
+    overflow: hidden
+}
+
+#inbound, #outbound{
+    overflow: auto;
     -webkit-overflow-scrolling: touch;
+}
+
+caption{
+    font-family: Impact,Haettenschweiler,Franklin Gothic Bold,Charcoal,Helvetica Inserat,Bitstream Vera Sans Bold,Arial Black,sans serif;
+    color: black;
+}
+
+#header1, #header2{
+    font-family: Impact,Haettenschweiler,Franklin Gothic Bold,Charcoal,Helvetica Inserat,Bitstream Vera Sans Bold,Arial Black,sans serif;
 }
 
 table {
@@ -61,9 +74,10 @@ table, th, td {
     padding: 5px;
 }
 
-#stops {
+#stops, #stops:first-child {
     background-color: forestgreen;
     color: white;
+    //position: fixed;
 }
 
 #times {

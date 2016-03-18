@@ -1,0 +1,36 @@
+{
+  "name": "leaflet-groupedlayercontrol",
+  "version": "0.4.0",
+  "homepage": "https://github.com/ismyrnow/Leaflet.groupedlayercontrol",
+  "authors": [
+    "Ishmael Smyrnow"
+  ],
+  "description": "A Leaflet layer control with support for grouping overlays together",
+  "main": "dist/leaflet.groupedlayercontrol.min.js",
+  "keywords": [
+    "leaflet",
+    "overlay",
+    "groups",
+    "grouped",
+    "control",
+    "plugin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.4.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.4.0",
+    "commit": "296c69540f961a9955f7a8865119279276db4fed"
+  },
+  "_source": "git://github.com/ismyrnow/Leaflet.groupedlayercontrol.git",
+  "_target": "^0.4.0",
+  "_originalSource": "leaflet-groupedlayercontrol",
+  "_direct": true
+}

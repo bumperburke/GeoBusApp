@@ -7,35 +7,42 @@
     <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1">
 
     <!-- JQuery and JQuery mobile -->
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-    <!-- Include the jQuery library -->
+    <link rel="stylesheet" href="./resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="./resources/jquery-2.2.2.min.js"></script>
+    <script src="./resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <!-- Include the jQuery Mobile library -->
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <!--Bootstrap library-->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./resources/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+    <script src="./resources/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
     <!-- LeafletJS -->
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>-->
+    <link rel="stylesheet" href="./resources/leaflet/leaflet.css" />
+    <script src="./resources/leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="./resources/leaflet-groupedlayercontrol/src/leaflet.groupedlayercontrol.css"/>
+    <link rel="stylesheet" href="./resources/Leaflet.EasyButton/src/easy-button.css"/>
     <!-- CSS & Scripts -->
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/home.css">
     <script src="./js/index.js"></script>
+    <link rel="stylesheet" href="./resources/font-awesome-4.5.0/css/font-awesome.min.css">
+    <script src="./resources/Leaflet.EasyButton/src/easy-button.js"></script>
 </head>
 
     <body>
     <div data-role="page" id="home">
-        
         <div data-role="panel" id="menu" data-swipe-close="true" data-display="overlay">
             <ul class="nav navbar-nav" id="slideMenu">
                 <center>
                 <label class="menuLabel">Swipe to Close</label><span id="slideGlyph" class="glyphicon glyphicon-chevron-left"></span></center>
                 <li><a href="#home" class="menuOption">Home</a></li>
                 <li><a href="#" class="menuOption">Track</a></li>
-                <li><a href="#" class="menuOption">Timetables</a></li>
-                <li><a href="#routes" class="menuOption">Routes</a></li>
+                <li><a href="#timetablesPage" class="menuOption">Timetables</a></li>
                 <li><a href="index.html" class="menuOption">Log Out</a></li>
             </ul>
         </div>
@@ -46,58 +53,105 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <img src="../images/logo.png" id="logo" alt="GeoBus Logo">
+            <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
 
         <div id="map" data-role="main" class="ui-content">
+            <script src="./resources/leaflet-groupedlayercontrol/src/leaflet.groupedlayercontrol.js"></script>
+            <script src="./resources/Leaflet.MakiMarkers-master/Leaflet.MakiMarkers.js"></script>
             <script src="./js/map.js"></script>
-        </div>
-    </div>
-
-    <div data-role="page" id="routes">
-        <script>$("map").remove();</script>
-        <div data-role="panel" id="menu" data-swipe-close="true" data-display="overlay">
-            <ul class="nav navbar-nav" id="slideMenu">
-                <center>
-                    <label class="menuLabel">Swipe to Close</label><span id="slideGlyph" class="glyphicon glyphicon-chevron-left"></span></center>
-                <li><a href="#home" class="menuOption">Home</a></li>
-                <li><a href="#" class="menuOption">Track</a></li>
-                <li><a href="#" class="menuOption">Timetables</a></li>
-                <li><a href="#routes" class="menuOption">Routes</a></li>
-                <li><button class="menuOption">Log Out</button></li>
-                <!--<li><a href="index.html" class="menuOption">Log Out</a></li>-->
-            </ul>
-        </div>
-
-        <div data-role="header" class="ui-header">
-            <a href="#menu" class="navbar-toggle" role="button">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <img src="../images/logo.png" id="logo" alt="GeoBus Logo">
-        </div>
-
-        <div data-role="main" class="ui-content">
-            <div class="jumbotron text-center">
-                <div class="container">
-                    <h2>Select A Route To View On Map</h2>
-                    <form role="form">
-                        <label for="selectOptions">Available Routes:</label>
-                        <select class="form-control" id="routeSelect">
-                            <option>Choose a Route</option>
-                            <option>Dundalk - Drogheda - Dublin</option>
-                            <option>Bettystown - Laytown - Dublin</option>
-                        </select>
-                        <br>
-                        <button type="submit" id="submitRoute">Submit</button>
-                    </form>
-                </div>
+            <div class="leaflet-top leaflet-left">
+                <button id="refresh" onClick="refresh();"><i class="fa fa-refresh"></i></button>
+                <button id="center" onClick="center();"><i class="fa fa-crosshairs"></i></button>
             </div>
         </div>
     </div>
+        
+        <!-- Timetables Page -->
+        <div data-role="page" id="timetablesPage">
+            <div data-role="panel" id="menu" data-swipe-close="true" data-display="overlay">
+                <ul class="nav navbar-nav" id="slideMenu">
+                    <center>
+                        <label class="menuLabel">Swipe to Close</label><span id="slideGlyph" class="glyphicon glyphicon-chevron-left"></span></center>
+                    <li><a href="#home" class="menuOption">Home</a></li>
+                    <li><a href="#" class="menuOption">Track</a></li>
+                    <li><a href="#timetablesPage" class="menuOption">Timetables</a></li>
+                    <li><a href="index.html" class="menuOption">Log Out</a></li>
+                </ul>
+            </div>
+
+            <div data-role="header" class="ui-header">
+                <a href="#menu" class="navbar-toggle" role="button">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
+            </div>
+
+            <div data-role="main" class="ui-content">
+                <div class="jumbotron text-center">
+                    <div class="container">
+                        <h2>Please Select A Route</h2>
+                        <form role="form">
+                            <label for="selectOptions">Available Routes:</label>
+                            <select class="form-control" id="routeSelect">
+                                <option>Choose a Route</option>
+                                <option>Dundalk-Drogheda-Dublin</option>
+                                <option>Bettystown-Laytown-Dublin</option>
+                                <option>IFSC</option>
+                                <option>Christmas Service</option>
+                                <option>City North</option>
+                            </select>
+                            <br>
+                            <button id="selectTimetable">Select</button>
+                        </form>
+                        <div class="alert alert-danger" id="tableSelectError">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Display Timetable -->
+        <div data-role="page" id="displayTimetable">
+            <div data-role="panel" id="menu" data-swipe-close="true" data-display="overlay">
+                <ul class="nav navbar-nav" id="slideMenu">
+                    <center>
+                        <label class="menuLabel">Swipe to Close</label><span id="slideGlyph" class="glyphicon glyphicon-chevron-left"></span></center>
+                    <li><a href="#home" class="menuOption">Home</a></li>
+                    <li><a href="#" class="menuOption">Track</a></li>
+                    <li><a href="#timetablesPage" class="menuOption">Timetables</a></li>
+                    <li><a href="index.html" class="menuOption">Log Out</a></li>
+                </ul>
+            </div>
+
+            <div data-role="header" class="ui-header">
+                <a href="#menu" class="navbar-toggle" role="button">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
+            </div>
+
+            <div data-role="main" class="ui-content">
+                <div id="tableContainer">
+                    <u><h2 id="header1"></h2></u>
+                    <div id="inbound">
+                    </div>
+                    <u><h2 id="header2"></h2></u>
+                    <div id="outbound">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    
     <script src="./js/home.js"></script>
-    <script src="./resources/Leaflet.EasyButton/src/easy-button.js"></script>
+    <script src="./js/getTimetable.js"></script>
 </body>
 
 </html>

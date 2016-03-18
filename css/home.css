@@ -24,12 +24,20 @@ body {
 .menuOption:active {
     background: #eeeeee;
 }
-/*#mapWrapper {
-    width: 100%;
-    height: 555px;
-    position: relative;
+
+#refresh {
+    height: 35px;
+    width: 35px;
+    margin: 10px 10px 10px 10px;
+    padding: 0;
+    box-shadow: 1px 1px 1px 1px #888888;
 }
 
-#buttonWrapper {
-    position: absolute;
-}*/
+#center {
+    height: 35px;
+    width: 35px;
+    font-size: 20px;
+    margin: 10px 10px 10px 10px;
+    padding: 0;
+    box-shadow: 1px 1px 1px 1px #888888;
+}

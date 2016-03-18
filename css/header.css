@@ -10,7 +10,7 @@
 }
 
 .navbar-toggle {
-    margin-bottom: 0px;
+    margin: 0;
     float: left;
     background-color: forestgreen;
     border-color: white;
