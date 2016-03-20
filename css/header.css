@@ -5,15 +5,24 @@
     height: 50px;
 }
 
-.icon-bar{
-    background-color: forestgreen;
+.icon-bar {
+    color: white;
+    background-color: white;
+    padding: 0;
+    margin-top: 10px;
 }
 
-.navbar-toggle {
-    margin: 0;
+#burger {
+    box-shadow: 0 0 0 0;
+    border-radius: 0 0 0 0;
+    display: block;
+    margin-top: 3px;
+    padding: 0;
     float: left;
-    background-color: forestgreen;
-    border-color: white;
+    height: 35px;
+    width: 40px;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 #logo {
@@ -31,11 +40,7 @@
 }
 
 #menu {
-    background-color: forestgreen;
-}
-
-.menuOption:link {
-    font-family: serif;
-    font-size: 20px;
-    color: white;
+    background-color: white;
+    border-color: white;
+    width: 60%;
 }

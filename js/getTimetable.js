@@ -12,6 +12,7 @@ $("#selectTimetable").click(function(){
             url: "https://www.geobus.co.uk/api/v1/getTimetable/"+sessionStorage.selectedTimetable,
             success: function (data) {
                 if (data.error === false) {
+                    var directions = ["dundalk->dublin", "dublin->dundalk", "bettystown->laytown->dublin", "dublin->laytown->bettystown"];
                     var monFriResults = data.data.timetable.monFri;
                     var satResults = data.data.timetable.sat;
                     var sunResults = data.data.timetable.sun;
@@ -78,20 +79,31 @@ $("#selectTimetable").click(function(){
                     outNumCols["monFri"] = getCols(outbound["monFri"])/outboundStops.length;
                     inNumCols["sat"] = getCols(inbound["sat"])/inboundStops.length;
                     outNumCols["sat"] = getCols(outbound["sat"])/outboundStops.length;
-                    inNumCols["sun"] = getCols(inbound["sun"])/inboundStops.length;
-                    outNumCols["sun"] = getCols(outbound["sun"])/outboundStops.length;
 
                     $.mobile.changePage('#displayTimetable');
 
                     $('#header1').append("<b>"+inbound["monFri"][0].direction+"</b>");
-                    generateTables("Monday to Friday", '#inbound', inbound["monFri"], inboundStops, inNumCols["monFri"]);
-                    generateTables("Saturday", '#inbound', inbound["sat"], inboundStops, inNumCols["sat"]);
-                    generateTables("Sunday/Bank Holidays", '#inbound', inbound["sun"], inboundStops, inNumCols["sun"]);
-
+                    if(inbound["monFri"][0].direction === directions[0]){
+                        inNumCols["sun"] = getCols(inbound["sun"])/inboundStops.length;
+                        generateTables("Monday to Friday", '#inbound', inbound["monFri"], inboundStops, inNumCols["monFri"]);
+                        generateTables("Saturday", '#inbound', inbound["sat"], inboundStops, inNumCols["sat"]);
+                        generateTables("Sunday/Bank Holidays", '#inbound', inbound["sun"], inboundStops, inNumCols["sun"]);
+                    }else if(inbound["monFri"][0].direction === directions[2]){
+                        generateTables("Monday to Friday", '#inbound', inbound["monFri"], inboundStops, inNumCols["monFri"]);
+                        generateTables("Saturday, Sunday & Bank Holiday", '#inbound', inbound["sat"], inboundStops, inNumCols["sat"]);
+                    }
+                    
+                    
                     $('#header2').append("<b>"+outbound["monFri"][0].direction+"</b>");
-                    generateTables("Monday to Friday", '#outbound', outbound["monFri"], outboundStops, outNumCols["monFri"]);
-                    generateTables("Saturday", '#outbound', outbound["sat"], outboundStops, outNumCols["sat"]);
-                    generateTables("Sunday/Bank Holidays", '#outbound', outbound["sun"], outboundStops, outNumCols["sun"]);
+                    if(outbound["monFri"][0].direction === directions[1]){
+                        outNumCols["sun"] = getCols(outbound["sun"])/outboundStops.length;
+                        generateTables("Monday to Friday", '#outbound', outbound["monFri"], outboundStops, outNumCols["monFri"]);
+                        generateTables("Saturday", '#outbound', outbound["sat"], outboundStops, outNumCols["sat"]);
+                        generateTables("Sunday/Bank Holidays", '#outbound', outbound["sun"], outboundStops, outNumCols["sun"]);
+                    }else if(outbound["monFri"][0].direction === directions[3]){
+                        generateTables("Monday to Friday", '#outbound', outbound["monFri"], outboundStops, outNumCols["monFri"]);
+                        generateTables("Saturday, Sunday & Bank Holiday", '#outbound', outbound["sat"], outboundStops, outNumCols["sat"]);
+                    }
 
                 } else if (data.error === true) {
 
@@ -100,7 +112,6 @@ $("#selectTimetable").click(function(){
             error: function (data) {
                 $('#tableSelectError').html("<center>Whoops! Something has gone wrong. Check Internet Connection and Try Again!</center>");
                 hideShowAlert('#tableSelectError');
-                console.log(data);
             }
         });
 
@@ -137,7 +148,7 @@ function inboundOutbound(results, firstDirection){
     return returns;
 }
 
-function generateTables(capt, divId, trips, stops, numCols){//, directionFlag){
+function generateTables(capt, divId, trips, stops, numCols){
     var html = '<table data-role="table" class="ui-responsive">';
     html += '<caption><b>'+capt+'</b></caption>';
     var count = 0;
@@ -148,7 +159,11 @@ function generateTables(capt, divId, trips, stops, numCols){//, directionFlag){
         html += '<tr><th id="stops">' + stops[i] + '</th>';
         
         for (; count < colsHolder; count++) {
-            html += '<td id="times"><b>' + trips[count].time.slice(0, 5) + '</b></td>';
+            if(trips[count].time === null){
+                html += '<td id="times"><center><b><font color="red">No Service</font></b></center></td>';
+            }else{
+                html += '<td id="times"><b>' + trips[count].time.slice(0, 5) + '</b></td>';
+            }
         }
         html += '</tr>';
         colsHolder = numCols*multiplier;

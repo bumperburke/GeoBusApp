@@ -8,21 +8,18 @@ body {
 }
 
 .menuLabel {
+    padding-top: 15px;
+    margin: -15px;
     color: white;
+    background-color: forestgreen;
+    height: 52px;
 }
 
 #slideGlyph {
-    font-size: 25px;
+    font-size: 15px;
     color: white;
     border-color: black;
-}
-
-.menuOption:visited {
-    color: white;
-}
-
-.menuOption:active {
-    background: #eeeeee;
+    margin-bottom: 10px;
 }
 
 #refresh {
@@ -33,11 +30,33 @@ body {
     box-shadow: 1px 1px 1px 1px #888888;
 }
 
-#center {
+#mapButton {
     height: 35px;
     width: 35px;
     font-size: 20px;
     margin: 10px 10px 10px 10px;
     padding: 0;
     box-shadow: 1px 1px 1px 1px #888888;
+}
+
+#menuOption {
+    align-content: center;
+    box-shadow: 0 4px 2px 2px #7ab97a;
+    border-radius: 0 0 0 0;
+    background-color: #389638;
+    color: white;
+    width: 99%;
+    border-color: forestgreen;
+}
+
+#menuOption:hover {
+    background-color: forestgreen;
+}
+
+#menuFooter {
+    margin-top: 60px;
+}
+
+#busIcon{
+    font-size: 40px;
 }

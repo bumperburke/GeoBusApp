@@ -1,5 +1,4 @@
-//$(document).ready(function(){
-    $('#failAlert').hide();
+$('#failAlert').hide();
     $('#registerSuccessAlert').hide();
     $('#registerFailAlert').hide();
     $.mobile.pageLoadErrorMessage = "";
@@ -27,7 +26,8 @@
                     if (data.error === false) {
                         sessionStorage.user = data.user;
                         sessionStorage.token = data.token;
-                        $.mobile.pageContainer.pagecontainer("change", "home.html");
+                        window.location.assign("home.html");
+                        //$.mobile.pageContainer.pagecontainer("change", "home.html#home");
                     } else if (data.error === true) {
                         $('#failAlert').html("<center>Invalid Login Credentials!</center>");
                         hideShowAlert($('#failAlert'));
@@ -35,7 +35,8 @@
                     }
                 },
                 error: function (data) {
-                    $('#failAlert').html("<center>Whoops Something Has Gone Wrong!</center>");
+                    $('#failAlert').html("<center>Whoops Something Has Gone Wrong! Check Internet Connection & Try Again.</center>");
+                    hideShowAlert($('#failAlert'));
                 }
             });
             
@@ -81,8 +82,7 @@
                     }
                 },
                 error: function (data) {
-                    console.log(data);
-                    $('#failAlert').html("<center>Whoops Something Has Gone Wrong!</center>");
+                    $('#failAlert').html("<center>Whoops Something Has Gone Wrong! Check Internet Connection & Try Again.</center>");
                     hideShowAlert($('#registerFailAlert'));
                 }
             });
@@ -99,4 +99,3 @@
             });
         });
     }
-//});

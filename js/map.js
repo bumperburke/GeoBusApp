@@ -1,13 +1,84 @@
+$("#home").on("pageshow",function(event, ui) {
+    map.invalidateSize();
+    
+    if(sessionStorage.busToTrack !== "false"){
+        trackBus(sessionStorage.busToTrack);
+    }
+});
+
 var map;
+var inteval;
 var polys = [];
 var dunDrogDub, bTown, ifsc, dunDrogDubStops, bTownStops, ifscStops;
 var routes = ["Dundalk-Drogheda-Dublin", "Bettystown-Laytown-Dublin", "IFSC"];
 var userIcon = L.MakiMarkers.icon({icon: "pitch", color: "#228b22", size: "m"});
 var busIcon = L.MakiMarkers.icon({icon: "bus", color: "#29ABE2", size: "m"});
 var stopIcon = L.MakiMarkers.icon({icon: "circle", color: "#FF0000", size: "m"});
+var userMarker, busMarker;
 dunDrogDubStops = L.layerGroup();
 bTownStops = L.layerGroup();
 //dunDrogDubStops = L.layerGroup();
+
+var refreshControl =  L.Control.extend({
+    options: {
+        position: 'topleft'
+    },
+    onAdd: function (map) {
+        var container = L.DomUtil.create('button');
+        container.id="mapButton";
+        container.innerHTML = '<i class="fa fa-refresh"></i>';
+        
+        container.onclick = function(){
+            location.reload();
+        }
+     
+        return container;
+    }
+});
+
+var locateControl =  L.Control.extend({
+    options: {
+        position: 'topleft'
+    },
+    onAdd: function (map) {
+        var container = L.DomUtil.create('button');
+        container.id="mapButton";
+        container.innerHTML = '<i class="fa fa-crosshairs"></i>';
+
+        container.onclick = function(){
+            if(userMarker != null){
+                map.removeLayer(userMarker);
+            }
+            map.locate({setView : true});
+        }
+
+        return container;
+    }
+});
+
+var trackControl =  L.Control.extend({
+    options: {
+        position: 'topleft'
+    },
+    onAdd: function (map) {
+        var container = L.DomUtil.create('button');
+        container.id="mapButton";
+        container.innerHTML = '<i id="busTrackBtn" class="fa fa-bus"></i>';
+
+        container.onclick = function(){
+            if(sessionStorage.busToTrack === "false"){
+                $.mobile.changePage('#track');
+            }else{
+                sessionStorage.busToTrack = false;
+                clearInterval(inteval);
+                $("#busTrackBtn").css("color", "black");
+                map.removeLayer(busMarker);
+            }
+        }
+
+        return container;
+    }
+});
 
 getRoute(routes[0]);
 getRoute(routes[1]);
@@ -22,15 +93,20 @@ ifsc = L.layerGroup([polys[2]]);
 
 var OpenMapSurfer_Roads = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
     maxZoom: 18,
+    minZoom: 5,
     attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
 var osmDefault = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
+    minZoom: 5,
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 });
 
 map = L.map('map', {zoomControl: false, layers: [osmDefault, dunDrogDub, bTown, ifsc, dunDrogDubStops, bTownStops]});
+map.addControl(new refreshControl());
+map.addControl(new locateControl());
+map.addControl(new trackControl());
 
 var baseMaps = {
     "Default": osmDefault,
@@ -74,9 +150,7 @@ map.on('locationerror', onLocationError);
 
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
-
-    L.marker(e.latlng,{icon: userIcon}).addTo(map)
-        .bindPopup(""+sessionStorage.user).openPop$
+    userMarker = L.marker(e.latlng,{icon: userIcon}).addTo(map).bindPopup(""+sessionStorage.user);
 }
 
 function onLocationError(e) {
@@ -141,10 +215,31 @@ function getRoute(route){
     });
 }
 
-function refresh(){
-    location.reload();
+function trackBus(devID){
+    trackCall(devID);
+    inteval = setInterval(function() {
+        map.removeLayer(busMarker);
+        trackCall(devID);
+    }, 1000 * 60 * 1); //1 min
 }
 
-function center(){
-    map.locate({setView : true});
+function trackCall(devID){    
+    $.ajax({
+        type: "GET",
+        url: "https://www.geobus.co.uk/api/v1/getLocation/"+devID,
+        async: false,
+        success: function (data) {
+            if (data.error == false) {
+            var lat = data.data[0].Xpos;
+            var lng = data.data[0].Ypos;
+
+            busMarker = L.marker([lat, lng],{icon: busIcon}).addTo(map).bindPopup(""+data.data[0].timestamp);
+            } else if (data.error == true) {
+            //hideShowAlert($('#failAlert'));
+            }
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
 }
