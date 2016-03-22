@@ -1,16 +1,8 @@
 html, body {
-    //position: relative !important;
-    //height: 100%;
     margin: 0;
     padding: 0;
     background-color: #eeeeee;
 }
-
-/*.ui-content {
-    padding: 0;
-    background-color: #eeeeee;
-    height: inherit;
-}*/
 
 .ui-content {
     align-content: center;
@@ -77,7 +69,6 @@ table, th, td {
 #stops, #stops:first-child {
     background-color: forestgreen;
     color: white;
-    //position: fixed;
 }
 
 #times {

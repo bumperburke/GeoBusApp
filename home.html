@@ -17,17 +17,16 @@
     <link rel="stylesheet" href="./resources/leaflet/leaflet.css" />
     <script src="./resources/leaflet/leaflet.js"></script>
     <link rel="stylesheet" href="./resources/leaflet-groupedlayercontrol/src/leaflet.groupedlayercontrol.css"/>
-    <link rel="stylesheet" href="./resources/Leaflet.EasyButton/src/easy-button.css"/>
     <!-- CSS & Scripts -->
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/home.css">
     <link rel="stylesheet" href="./resources/font-awesome-4.5.0/css/font-awesome.min.css">
     <script src="./js/index.js"></script>
-    <script src="./resources/Leaflet.EasyButton/src/easy-button.js"></script>
 </head>
 
     <body>
+    <!-- Home Page Begin -->
     <div data-role="page" id="home">
         <div data-role="header" class="ui-header">
             <a href="#menu" class="navbar-btn btn-default navbar-toggle" id="burger">
@@ -38,6 +37,7 @@
             <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
         
+        <!-- Page Main Content -->
         <div id="map" data-role="main" class="ui-content">
             <script src="./resources/leaflet-groupedlayercontrol/src/leaflet.groupedlayercontrol.js"></script>
             <script src="./resources/Leaflet.MakiMarkers-master/Leaflet.MakiMarkers.js"></script>
@@ -45,7 +45,7 @@
         </div>
     </div>
         
-        <!-- Timetables Page -->
+        <!-- Timetables Page Begin -->
         <div data-role="page" id="timetablesPageHome">
             <script src="./js/getTimetable.js"></script>
             <div data-role="header" class="ui-header">
@@ -57,8 +57,10 @@
                 <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
             </div>
 
+            <!-- Page Main Content -->
             <div data-role="main" class="ui-content">
                 <script>
+                    //Ensures that the timetables are removed drom the page on page exit
                     $(window).on("navigate", function (event, data) {
                         var direction = data.state.direction;
                         if (direction == 'back') {
@@ -78,9 +80,6 @@
                                 <option>Choose a Route</option>
                                 <option>Dundalk-Drogheda-Dublin</option>
                                 <option>Bettystown-Laytown-Dublin</option>
-                                <option>IFSC</option>
-                                <option>Christmas Service</option>
-                                <option>City North</option>
                             </select>
                             <br>
                             <button id="selectTimetable">Select</button>
@@ -93,7 +92,7 @@
             </div>
         </div>
 
-        <!-- Display Timetable -->
+        <!-- Display Timetable Page Begin -->
         <div data-role="page" id="displayTimetable">
             <div data-role="header" class="ui-header">
                 <a href="#menu" class="navbar-btn btn-default navbar-toggle" id="burger">
@@ -104,6 +103,7 @@
                 <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
             </div>
 
+            <!-- Page Main Content -->
             <div data-role="main" class="ui-content">
                 <div id="tableContainer">
                     <u><h2 id="header1"></h2></u>
@@ -117,7 +117,7 @@
 
         </div>
         
-        <!-- Track Bus -->
+        <!-- Track Bus Page Begin -->
         <div data-role="page" id="track">
             <div data-role="header" class="ui-header">
                 <a href="#menu" class="navbar-btn btn-default navbar-toggle" id="burger">
@@ -128,20 +128,20 @@
                 <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
             </div>
 
+            <!-- Page Main Content -->
             <div data-role="main" class="ui-content">
                 <div class="container">
                     <h2>Please Select A Route</h2>
+                    <!-- Select a Rote form to see available buses for tracking -->
                     <form role="form">
                         <label for="selectOptions">Available Routes:</label>
                         <select class="form-control" id="routeTrackSelect">
                             <option>Choose a Route</option>
                             <option>Dundalk-Drogheda-Dublin</option>
                             <option>Bettystown-Laytown-Dublin</option>
-                            <option>IFSC</option>
-                            <option>City North</option>
                         </select>
                         <br>
-                        <button id="selectTrackTimetable">Track</button>
+                        <button id="trackRoute">Track</button>
                     </form>
                     <div class="alert alert-danger" id="trackRouteSelectError"></div>
                 </div>
@@ -151,21 +151,24 @@
             </div>
         </div>
         
+        <!-- External Panel Burger Button Menu -->
         <div data-role="panel" id="menu" data-swipe-close="true" data-display="overlay">
             <center><h5 class="menuLabel">Swipe to Close</h5></center>
             <ul class="nav navbar-nav" id="slideMenu">
                 <li><button id="menuOption" onclick="$.mobile.changePage('#home');">Home</button></li>
                 <li><button id="menuOption" onclick="$.mobile.changePage('#track');">Track</button></li>
                 <li><button id="menuOption" onclick="$.mobile.changePage('#timetablesPageHome');">Timetables</button></li>
-                <li><button id="menuOption" onclick="$.mobile.changePage('index.html#loginPage');">Logout</button></li>
+                <li><button id="menuOption" onclick="logout()">Logout</button></li>
             </ul>
             
+            <!-- Menu Footer -->
             <div id="menuFooter">
                 <center><img src="./images/logo.png" height="100px" width="150px">
                     <br/><b><i>Developed By Stefan Burke</i></b></center>
             </div>
         </div>
         
+        <!-- Scripts -->
         <script src="./js/getTimetable.js"></script>
         <script src="./js/home.js"></script>
         <script src="./js/track.js"></script>

@@ -4,7 +4,7 @@
 <head>
     <title>GeoBus</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1">
     
     <!-- JQuery and JQuery mobile -->
     <link rel="stylesheet" href="./resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
@@ -17,24 +17,24 @@
     <link rel="stylesheet" href="./resources/leaflet/leaflet.css" />
     <script src="./resources/leaflet/leaflet.js"></script>
     <link rel="stylesheet" href="./resources/leaflet-groupedlayercontrol/src/leaflet.groupedlayercontrol.css"/>
-    <link rel="stylesheet" href="./resources/Leaflet.EasyButton/src/easy-button.css"/>
     <link rel="stylesheet" href="./resources/font-awesome-4.5.0/css/font-awesome.min.css">
     <!-- CSS & Scripts -->
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/home.css">
     <script src="./resources/leaflet-groupedlayercontrol/src/leaflet.groupedlayercontrol.js"></script>
-    <script src="./resources/Leaflet.EasyButton/src/easy-button.js"></script>
     <script src="./js/home.js"></script>
 </head>
 
 <body>
     <!-- Index Page Begin -->
     <div data-role="page" id="welcomePage">
+        <!-- Page Header -->
         <div data-role="header" class="ui-header">
             <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
         
+        <!-- Page Main Content -->
         <div data-role="main" class="ui-content">
             <div class="jumbotron text-center">
                 <h1>Welcome to GeoBus</h1>
@@ -54,24 +54,23 @@
     
     <!-- Timetables Page -->
     <div data-role="page" id="timetablesPage">
+        <!-- Page Header -->
         <div data-role="header" class="ui-header">
             <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
 
+        <!-- Page Main Content -->
         <div data-role="main" class="ui-content">
             <div class="jumbotron text-center">
                 <div class="container">
                     <h2>Please Select A Route</h2>
+                    <!-- Form to select a timetable -->
                     <form role="form">
                         <label for="selectOptions">Available Routes:</label>
                         <select class="form-control" id="routeSelect">
                             <option>Choose a Route</option>
                             <option>Dundalk-Drogheda-Dublin</option>
                             <option>Bettystown-Laytown-Dublin</option>
-                            <option>IFSC</option>
-                            <option>UCD College</option>
-                            <option>Christmas Service</option>
-                            <option>City North</option>
                         </select>
                         <br>
                         <button id="selectTimetable">Select</button>
@@ -86,12 +85,15 @@
     
     <!-- Display Timetable -->
     <div data-role="page" id="displayTimetable">
+        <!-- Page Header -->
         <div data-role="header" class="ui-header">
             <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
 
+        <!-- Page Main Content -->
         <div data-role="main" class="ui-content">
             <script>
+                //Ensures that the timetables are removed drom the page on page exit
                 $(window).on("navigate", function (event, data) {
                     var direction = data.state.direction;
                     if (direction == 'back') {
@@ -102,6 +104,7 @@
                     }
                 });
             </script>
+            <!-- Div where timetables will be created by getTimetables.js -->
             <div id="tableContainer">
                 <u><h2 id="header1"></h2></u>
                 <div id="inbound">
@@ -116,13 +119,16 @@
     
     <!-- Login Page Begin -->
     <div data-role="page" id="loginPage">
+        <!-- Page Header -->
         <div data-role="header" class="ui-header">
             <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
         
+        <!-- Page Main Content -->
         <div data-role="main" class="ui-content">
             <h2 class="text-center"><strong>Login to GeoBus</strong></h2>
             <div class="loginForm">
+                <!-- Login Form -->
                 <form method="post">
                     <center>
                     <fieldset data-role="controlgroup">
@@ -159,13 +165,16 @@
     
     <!-- Register Page Begin -->
     <div data-role="page" id="registerPage">
+        <!-- Page Header -->
         <div data-role="header" class="ui-header">
             <img src="./images/logo.png" id="logo" alt="GeoBus Logo">
         </div>
 
+    <!-- Page Main Content -->
     <div data-role="main" class="ui-content">
         <div class="jumbotron text-center">
             <h2>Create New Account</h2>
+                <!-- Register Form -->
                 <form>
                     <center>
                     <div class="form-group">
@@ -216,6 +225,7 @@
         </div>
     </div>
     
+    <!-- Scripts -->
     <script src="./js/index.js"></script>
     <script src="./js/getTimetable.js"></script>
 </body>
