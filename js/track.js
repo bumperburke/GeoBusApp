@@ -37,13 +37,17 @@ $("#trackRoute").click(function(){
                         html += '<br/>Please Try Again Later or Select Another Service</h5></font></center>';
                         $('#availableBuses').append(html);
                     }else{ //else if there is data
-                        var timetstamp = data.data[0].timestamp; //get the timestamp from the returned data
-                        timetstamp = timetstamp.split(" "); //split the timestamp on space
+                        console.log(data);
                         var html = '<center><h3>Available Viehcles:<h3></center>'; //create variable to hole html code with heading
-                        html += '<center><h4>'+route+'</h4>'; //add the route tp the html
-                        html += '<label>'+timetstamp[1]+'</label>'; //add timestamp label to differentiate available buses
-                        //create a hyperlink icon so a user can click on it. This will call setBusToTrack and redirect to home page to begin tracking
-                        html += '<a href="#home" onclick="setBusToTrack('+data.data[0].deviceID+')"><i id="busIcon" class="fa fa-bus"></i></a></center>';
+                        html += '<center><h4>'+route+'</h4>'; //add the route to the html
+                        for(i = 0; i < data.data.length; i++){
+                            var timestamp = data.data[i].timestamp; //retrieve the timestamp of available bus
+                            timestamp = timestamp.split(" "); //split the timestamp on space
+                            html += '<label>'+timestamp[1]+'</label>'; //add timestamp label to differentiate available buses
+                            //create a hyperlink icon so a user can click on it. This will call setBusToTrack and redirect to home page to begin tracking
+                            html += '<a href="#home" onclick="setBusToTrack('+data.data[i].deviceID+')"><i id="busIcon" class="fa fa-bus"></i></a>';
+                        }
+                        html += '</center>'; //close center html brackets
                         $('#availableBuses').append(html); //append html to div on track page
                     }
 
