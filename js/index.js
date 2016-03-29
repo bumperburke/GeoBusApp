@@ -14,7 +14,7 @@ $('#loginButton').click(function () {
     var passwordStrengthRegex = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6,12})/gm; //the regex for passwords to match
     var email = $("#email").val(); //assign the email to a variable
     var pword = $("#password").val(); //assign the password to a variable
-        
+    
     if(!pword.match(passwordStrengthRegex) && pword.length !== 0){ //if the pass does not match regex and password is not empty
         //set alert popup text and call hideShowAlert
         $('#failAlert').html("<center>Password Rules: 6-12 Characters & At Least 1 Uppercase, 1 Lowercase, 1 Number.</center>");
@@ -61,51 +61,87 @@ $("#registerButton").click(function () {
     var pass = $("#passwordNew").val();
     var passMatch = $("#passMatch").val();
 
-    //if the password does not match the regex
-    if (!pass.match(passwordStrengthRegex)) {
-        //set the text of the alert popup
-        $('#registerFailAlert').html("<center>Password Rules: 6-12 Characters & At Least 1 Uppercase, 1 Lowercase, 1 Number.</center>");
-    }
-    //else if the password and the password re enter fields do not match
-    else if (pass !== passMatch) {
-        //set the text of the alert popup
-        $('#registerFailAlert').html("<center>Passwords Do Not Match!</center>");
-    }
-    //else if the form entries are not all empty
-    else if (name !== null &&  sex !== null && email !== null && pass !== null && passMatch !== null) {
-        var data = {name: name, age: age, sex: sex, emailNew: email, pass: pass}; //create an array containing all of the form entries
-        
-        $.ajax({ //begin ajax request
-            type: "POST", //it is a post request
-            data: JSON.stringify(data), //convert data array to a JSON array
-            url: "https://www.geobus.co.uk/api/v1/register", //Server URL
-            success: function (data) { //if ajax request is successful
-                if (data.error === false) { //if server error flag is false
-                    //set the text of the alert popup and call hideShowAlert
-                    $('#registerSuccessAlert').html("<center>Successfully Registered! You May Login.</center>");
-                    hideShowAlert($('#registerSuccessAlert'));
-                    $.mobile.changePage('#loginPage'); //change page back to login page
-                } else if (data.error === true) { //else if the server error flag is true
-                    if(data.message == "duplicate"){ //if the server message is "duplicate"
-                        $('#registerFailAlert').html("<center>Sorry, Email already in use.</center>"); //set text of alert popup
-                    }
-                    else{ //else
+    //if the form entries are not all empty
+    if (name !== "" &&  sex !== "" && email !== "" && pass !== "" && passMatch !== "") {
+        //Ensure that when all fields are entered that CSS is changed from red to white
+        emptyCheck(name, $('#name'));
+        emptyCheck(email, $('#emailNew'));
+        emptyCheck(pass, $('#passwordNew'));
+        emptyCheck(passMatch, $('#passMatch'));
+        //if the password does not match the regex
+        if (!pass.match(passwordStrengthRegex)) {
+            //set CSS of password to red
+            $('#passwordNew').css("background-color", "#ff6666");
+            //set the text of the alert popup
+            $('#registerFailAlert').html("<center>Password Rules: 6-12 Characters & At Least 1 Uppercase, 1 Lowercase.</center>");
+            hideShowAlert('#registerFailAlert');
+        }
+        //else if the password and the password re enter fields do not match
+        else if (pass !== passMatch) {
+            //Change CSS of password field to white and pass match to red
+            $('#passwordNew').css("background-color", "white");
+            $('#passMatch').css("background-color", "#ff6666");
+            //set the text of the alert popup
+            $('#registerFailAlert').html("<center>Passwords Do Not Match!</center>");
+            hideShowAlert('#registerFailAlert');
+        }
+        else if (pass === passMatch){
+            //change CSS of match field to white
+            $('#passMatch').css("background-color", "white");
+            var data = {name: name, age: age, sex: sex, emailNew: email, pass: pass}; //create an array containing all of the form entries
+
+            $.ajax({ //begin ajax request
+                type: "POST", //it is a post request
+                data: JSON.stringify(data), //convert data array to a JSON array
+                url: "https://www.geobus.co.uk/api/v1/register", //Server URL
+                success: function (data) { //if ajax request is successful
+                    if (data.error === false) { //if server error flag is false
+                        //set the text of the alert popup and call hideShowAlert
+                        $('#registerSuccessAlert').html("<center>Successfully Registered! You May Login.</center>");
+                        hideShowAlert($('#registerSuccessAlert'));
+                        $.mobile.changePage('#loginPage'); //change page back to login page
+                    } else if (data.error === true) { //else if the server error flag is true
+                        if(data.message == "duplicate"){ //if the server message is "duplicate"
+                            $('#registerFailAlert').html("<center>Sorry, Email already in use.</center>"); //set text of alert popup
+                        }
+                        else{ //else
                             $('#registerFailAlert').html("<center>Whoops Something Has Gone Wrong!</center>"); //set the text of alert popup
                         }
-                    hideShowAlert($('#registerFailAlert')); //call hideShowAlert
+                        hideShowAlert($('#registerFailAlert')); //call hideShowAlert
+                    }
+                },
+                error: function (data) { //if the jax request fails
+                    //Set the text of the alert popup and call hideShowAlert
+                    $('#registerFailAlert').html("<center>Whoops Something Has Gone Wrong! Check Internet Connection & Try Again.</center>");
+                    hideShowAlert($('#registerFailAlert'));
                 }
-        },
-        error: function (data) { //if the jax request fails
-                //Set the text of the alert popup and call hideShowAlert
-                $('#failAlert').html("<center>Whoops Something Has Gone Wrong! Check Internet Connection & Try Again.</center>");
-                hideShowAlert($('#registerFailAlert'));
-            }
-        });
+            });
+        }
+    }else{
+        //If there are empty fields, check what fields are empty and change CSS accordingly and print error message
+        emptyCheck(name, $('#name'));
+        emptyCheck(email, $('#emailNew'));
+        emptyCheck(pass, $('#passwordNew'));
+        emptyCheck(passMatch, $('#passMatch'));
+        $('#registerFailAlert').html("<center>Highlighted Fields Are Required!</center>");
+        hideShowAlert($('#registerFailAlert'));
     }
-        
-    hideShowAlert($('#registerFailAlert')); //call hideShowAlert for password failures
+
     return false; //return false to onclick method so page does not redirect
 });
+
+/*
+*   Summary: emptyCheck is used to validate the register form and changes CSS background colors
+*   Parameters: variable - the variable of the form input, id - the ID of the alert so it knows which alert to show.
+*/
+function emptyCheck(variable, id){
+    if(variable === ""){
+        $(id).css("background-color", "#ff6666");
+    }
+    else{
+        $(id).css("background-color", "white");
+    }
+}
 
 /*
 *   Summary: hideShowAlert is used to show a popup alert on screen and then automatically close it after a few seconds
