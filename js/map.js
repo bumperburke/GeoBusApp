@@ -226,6 +226,7 @@ function getStops(route, id){
         },
         error: function (data) {
             //console.log(data); //if error with ajax request log the data to console
+            
         }
     });
 }
@@ -274,7 +275,7 @@ function trackBus(devID){
     inteval = setInterval(function() { //set an interval of 1 minute
         map.removeLayer(busMarker); //remove the bus marker
         trackCall(devID); //call trackCall
-    }, 1000 * 60 * 1); //1 min
+    }, 1000 * 30); //30 seconds
 }
 
 /*
@@ -302,6 +303,26 @@ function trackCall(devID){
         },
         error: function (data) { //if problem with ajax request
             //console.log(data); //if error with ajax request log the data to console
+            sessionStorage.busToTrack = false; //set busToTrack to false 
+            clearInterval(inteval); //clear the timer interval on the ajax request for updating bus location
+            $("#busTrackBtn").css("color", "black"); //change the button colour back to black
+            map.removeLayer(busMarker); //remove the bus marker
+            $.mobile.changePage('#track'); //change page to track page
+            //Set error on track page and the call hideShowAlert to display and dismiss the alert
+            $('#trackRouteSelectError').html("<center>An Error Has Occured. Please Check Internet Connection & Try Again.</center>");
+            hideShowAlert($('#trackRouteSelectError'));
         }
+    });
+}
+
+/*
+*   Summary: hideShowAlert is used to show a popup alert on screen and then automatically close it after a few seconds
+*   Parameters: alertId - the ID of the alert so it knows which alert to show.
+*/
+function hideShowAlert(alertId) {
+    $(alertId).show('slow', function () {
+        $(alertId).fadeTo(4000, 500).slideUp(500, function () {
+            $(alertId).hide();
+        });
     });
 }
