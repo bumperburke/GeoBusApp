@@ -18,6 +18,7 @@ var inteval; //variable to hold the interval of the track bus ajax request
 var polys = []; //array to hold polylines
 var dunDrogDub, bTown, ifsc, dunDrogDubStops, bTownStops, ifscStops; //variables that will be stop layers
 var routes = ["Dundalk-Drogheda-Dublin", "Bettystown-Laytown-Dublin", "IFSC"]; //available routes
+var locateFlag = true; //flag to check if user wants to be tracked or not
 
 //Custom marker initializations
 var userIcon = L.MakiMarkers.icon({icon: "pitch", color: "#228b22", size: "m"});
@@ -58,14 +59,21 @@ var locateControl =  L.Control.extend({
     onAdd: function (map) { //on the button being added run this function passing in the map variable
         var container = L.DomUtil.create('button'); //create a button in the DOM
         container.id="mapButton"; //Assign id to button
-        container.innerHTML = '<i class="fa fa-crosshairs"></i>'; //insert a font awesome icon onto button
+        container.innerHTML = '<i id="locateButton" class="fa fa-crosshairs"></i>'; //insert a font awesome icon onto button
 
         //method to handle button clicks
         container.onclick = function(){
-            if(userMarker != null){ //if user marker is already on map
-                map.removeLayer(userMarker); //remove marker
+            if(locateFlag === true){ //if locateFlag is true
+                map.locate({setView: false, enableHighAccuracy: true, watch: true, maxZoom: 18}); //relocate user calling leaflet locate method
+                locateFlag = false; //set the flag to false
+                $("#locateButton").css("color", "green"); //change button colour
             }
-            map.locate({setView : true}); //relocate user calling leaflet locate method
+            else if(locateFlag === false){ //if locateFlag is false
+                map.stopLocate(); //stop tracking user
+                locateFlag = true; //set flag to true
+                $("#locateButton").css("color", "black"); //set button colour
+            }
+            
         }
 
         return container; //return container
@@ -167,7 +175,7 @@ map.removeLayer(ifscStops);
 map.locate({
     setView: true,
     maxZoom: 18, //max map zoom
-    enableHighAccuracy: true //enable high GPS accuracy
+    enableHighAccuracy: true, //enable high GPS accuracy
 });
 
 map.on('locationfound', onLocationFound); //leaflet method for finding location
@@ -178,6 +186,7 @@ map.on('locationerror', onLocationError); //leaflet method if there is an error 
 *   Parameters: e - a browser parameter that contains data such as latitude, longitude, heading etc.
 */
 function onLocationFound(e) {
+    console.log("Tracking");
     if(userMarker === undefined){ //if userMarker is not already on map when method called
         userMarker = L.marker(e.latlng,{icon: userIcon}).addTo(map).bindPopup(""+sessionStorage.user); //create marker and add to map
     }else{ //else if marker is on map when this is called
@@ -191,7 +200,8 @@ function onLocationFound(e) {
 *   Parameters: e - a browser parameter that contains data such as latitude, longitude, heading etc.
 */
 function onLocationError(e) {
-    alert(e.message); //print alert with error message
+    alert("Error Finding Location. Reload Page or Try Again Later"); //print alert with error message
+    map.stopLocate(); //stop locating user
 }
 
 /*
