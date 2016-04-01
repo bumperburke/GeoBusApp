@@ -186,7 +186,6 @@ map.on('locationerror', onLocationError); //leaflet method if there is an error 
 *   Parameters: e - a browser parameter that contains data such as latitude, longitude, heading etc.
 */
 function onLocationFound(e) {
-    console.log("Tracking");
     if(userMarker === undefined){ //if userMarker is not already on map when method called
         userMarker = L.marker(e.latlng,{icon: userIcon}).addTo(map).bindPopup(""+sessionStorage.user); //create marker and add to map
     }else{ //else if marker is on map when this is called
