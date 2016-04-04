@@ -21,7 +21,7 @@ $('#loginButton').click(function () {
         hideShowAlert($('#failAlert'));
         return false;
     }
-    else if (email.length !== 0 && pword.length !== 0) { //else if email and password are not empty
+    else if (email.length !== 0 && pword.length !== 0) { //else if email & password are not empty
         var data = {email: email, password: pword}; //create an array containing the email and password
 
         $.ajax({ //begin ajax request
