@@ -19,6 +19,7 @@ $('#loginButton').click(function () {
         //set alert popup text and call hideShowAlert
         $('#failAlert').html("<center>Password Rules: 6-12 Characters & At Least 1 Uppercase, 1 Lowercase, 1 Number.</center>");
         hideShowAlert($('#failAlert'));
+        return false;
     }
     else if (email.length !== 0 && pword.length !== 0) { //else if email and password are not empty
         var data = {email: email, password: pword}; //create an array containing the email and password
